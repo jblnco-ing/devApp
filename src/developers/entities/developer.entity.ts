@@ -1,12 +1,7 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import {
-  Column,
-  PrimaryGeneratedColumn,
-  OneToMany,
-  ManyToMany,
-  JoinTable,
-} from 'typeorm';
+import { Column, PrimaryGeneratedColumn, OneToMany, ManyToMany } from 'typeorm';
 import { Rol } from 'src/roles/entities/rol.entity';
+import { Project } from 'src/projects/entities/projects.entity';
 //TypeOrm
 //Graphql
 //typeScript
@@ -18,7 +13,7 @@ export class Developer {
   @Field((type) => Int)
   id: number;
   //name
-  @Column({ type: 'varchar', length: 80 })
+  @Column({ type: 'varchar', length: 80, unique: true })
   @Field()
   name: string;
   //email
@@ -29,4 +24,6 @@ export class Developer {
   @OneToMany(() => Rol, (role_dev) => role_dev.developer)
   role_developer: Rol[];
   //ManyToMany relationship
+  @ManyToMany(() => Project, (project) => project.developers)
+  projects: Project[];
 }

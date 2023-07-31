@@ -1,6 +1,13 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import {
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm';
 import { Rol } from 'src/roles/entities/rol.entity';
+import { Developer } from 'src/developers/entities/developer.entity';
 
 enum statusType {
   'In Progress',
@@ -33,4 +40,8 @@ export class Project {
   //role_project
   @OneToMany(() => Rol, (role_proj) => role_proj.project)
   role_project: Rol[];
+  //ManyToMany relationship
+  @ManyToMany(() => Developer, (developer) => developer.projects)
+  @JoinTable()
+  developers: Developer[];
 }
