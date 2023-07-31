@@ -2,11 +2,43 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Project {
+  id: Int!
+  name: String!
+  description: String
+  status: statusType!
+  role_project: Int!
+}
+
+enum statusType {
+  Active
+  Pause
+  Done
+  Canceled
+  Other
+}
+
 type Rol {
   id: Int!
   name: String!
 }
 
+type Developer {
+  id: Int!
+  name: String!
+  email: String
+}
+
 type Query {
+  findAllDeveloper: [Developer!]!
+  findAllProject: [Project!]!
   findAllRoles: [Rol!]!
+}
+
+type Mutation {
+  createRol(rolInput: CreateRolInput!): Rol!
+}
+
+input CreateRolInput {
+  name: String!
 }

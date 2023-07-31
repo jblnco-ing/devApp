@@ -1,11 +1,18 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { Column, PrimaryGeneratedColumn, OneToMany, ManyToMany } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  ManyToMany,
+} from 'typeorm';
 import { Rol } from 'src/roles/entities/rol.entity';
 import { Project } from 'src/projects/entities/projects.entity';
 //TypeOrm
 //Graphql
 //typeScript
 
+@Entity()
 @ObjectType()
 export class Developer {
   //id

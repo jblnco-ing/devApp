@@ -1,5 +1,6 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import {
+  Entity,
   Column,
   PrimaryGeneratedColumn,
   OneToMany,
@@ -8,15 +9,20 @@ import {
 } from 'typeorm';
 import { Rol } from 'src/roles/entities/rol.entity';
 import { Developer } from 'src/developers/entities/developer.entity';
+import { registerEnumType } from '@nestjs/graphql';
 
 enum statusType {
-  'In Progress',
+  'Active',
   'Pause',
   'Done',
   'Canceled',
   'Other',
 }
+registerEnumType(statusType, {
+  name: 'statusType',
+});
 
+@Entity()
 @ObjectType()
 export class Project {
   //id

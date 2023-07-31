@@ -1,8 +1,15 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
 import { Project } from 'src/projects/entities/projects.entity';
 import { Developer } from 'src/developers/entities/developer.entity';
 
+@Entity()
 @ObjectType()
 export class Rol {
   //id
