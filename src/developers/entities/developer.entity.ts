@@ -27,10 +27,10 @@ export class Developer {
   @Column({ type: 'varchar', length: 50, nullable: true })
   @Field({ nullable: true })
   email?: string;
-  //role_developer
-  @OneToMany(() => Rol, (role_dev) => role_dev.developer)
-  role_developer: Rol[];
-  //ManyToMany relationship
+  //ManyToMany Project relationship
+  @ManyToMany(() => Rol, (rol) => rol.developers)
+  roles: Rol[];
+  //ManyToMany Project relationship
   @ManyToMany(() => Project, (project) => project.developers)
   projects: Project[];
 }

@@ -3,7 +3,6 @@ import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
-  OneToMany,
   ManyToMany,
   JoinTable,
 } from 'typeorm';
@@ -43,9 +42,8 @@ export class Project {
   status: statusType;
   //role_project
   @Field((type) => Int)
-  //role_project
-  @OneToMany(() => Rol, (role_proj) => role_proj.project)
-  role_project: Rol[];
+  @ManyToMany(() => Rol, (rol) => rol.projects)
+  roles: Rol[];
   //ManyToMany relationship
   @ManyToMany(() => Developer, (developer) => developer.projects)
   @JoinTable()

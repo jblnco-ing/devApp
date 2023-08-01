@@ -3,8 +3,8 @@ import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
-  ManyToOne,
-  JoinColumn,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
 import { Project } from 'src/projects/entities/projects.entity';
 import { Developer } from 'src/developers/entities/developer.entity';
@@ -25,9 +25,11 @@ export class Rol {
   //sabe que el decorador que el decorador que
   // tiene la relación manyToOne es la que
   //debe tener la FK
-  @ManyToOne(() => Developer, (developer) => developer.role_developer)
-  developer: Developer;
+  @ManyToMany(() => Developer, (developer) => developer.roles)
+  @JoinTable()
+  developers: Developer[];
   //Project
-  @ManyToOne(() => Project, (project) => project.role_project)
-  project: Project;
+  @ManyToMany(() => Project, (project) => project.roles)
+  @JoinTable()
+  projects: Project[];
 }

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Rol } from '../entities/rol.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateRolInput } from '../dtos/create-rol.input';
+import { CreateRolDto, UpdateRolDto } from '../dtos/rol.dto';
 
 @Injectable()
 export class RolesService {
@@ -12,8 +12,26 @@ export class RolesService {
     return this.rolRepository.find();
   }
 
-  createRol(rol: CreateRolInput): Promise<Rol> {
+  async findRolById(id: number): Promise<Rol> {
+    return this.rolRepository.findOne({
+      where: {
+        id,
+      },
+    });
+  }
+
+  createRol(rol: CreateRolDto): Promise<Rol> {
     const newRol = this.rolRepository.create(rol);
     return this.rolRepository.save(newRol);
   }
+
+  async updateRol(id: Rol, changes: UpdateRolDto): Promise<Rol> {
+    const newRol = await this.rolRepository.findOneBy(id);
+    this.rolRepository.merge(newRol, changes);
+    return this.rolRepository.save(newRol);
+  }
+
+  // removeRolById(id: number) {
+  //   return this.rolRepository.delete(id);
+  // }
 }

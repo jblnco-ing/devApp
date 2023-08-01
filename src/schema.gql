@@ -7,7 +7,7 @@ type Project {
   name: String!
   description: String
   status: statusType!
-  role_project: Int!
+  roles: Int!
 }
 
 enum statusType {
@@ -31,14 +31,33 @@ type Developer {
 
 type Query {
   findAllDeveloper: [Developer!]!
+  findDeveloperById(id: Int!): Developer!
   findAllProject: [Project!]!
+  findProjectById(id: Int!): Project!
   findAllRoles: [Rol!]!
+  findRolById(id: Int!): Rol!
 }
 
 type Mutation {
-  createRol(rolInput: CreateRolInput!): Rol!
+  createDeveloper(DeveloperInput: CreateDeveloperDto!): Developer!
+  createProject(ProjectInput: CreateProjectDto!): Project!
+  createRol(rolInput: CreateRolDto!): Rol!
 }
 
-input CreateRolInput {
+input CreateDeveloperDto {
+  name: String!
+  email: String
+  rolId: Int!
+}
+
+input CreateProjectDto {
+  name: Int!
+  description: String
+  status: Float!
+  rolId: Int!
+  developerId: Int!
+}
+
+input CreateRolDto {
   name: String!
 }
