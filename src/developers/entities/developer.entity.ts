@@ -29,7 +29,8 @@ export class Developer {
   email?: string;
   //ManyToMany Project relationship
   @ManyToMany(() => Rol, (rol) => rol.developers)
-  roles: Rol[];
+  @Field()
+  rolId: number;
   //ManyToMany Project relationship
   @ManyToMany(() => Project, (project) => project.developers)
   projects: Project[];

@@ -1,8 +1,9 @@
-import { Query, Resolver, Mutation, Args, Int } from '@nestjs/graphql';
+import { Query, Resolver, Mutation, Args, Int, Parent, ResolveField} from '@nestjs/graphql';
 import { RolesService } from '../services/roles.service';
 import { Rol } from '../entities/rol.entity';
 import { CreateRolDto, UpdateRolDto } from '../dtos/rol.dto';
 import { DeleteResult } from 'typeorm/driver/mongodb/typings';
+import { type } from 'os';
 
 @Resolver()
 export class RolesResolver {
@@ -11,6 +12,11 @@ export class RolesResolver {
   findAllRoles() {
     return this.rolesService.findAll();
   }
+  // @ResolveField((returns) => Rol)
+  // rol(@Parent() rol: Rol): Promise<Rol> {
+  //   return this.rolesService.findRolById(rol.id);
+  // }
+
   @Query((returns) => Rol)
   findRolById(@Args('id', { type: () => Int }) id: number) {
     return this.rolesService.findRolById(id);
@@ -28,11 +34,17 @@ export class RolesResolver {
     return this.rolesService.updateRol(id, rolInput);
   }
 
-  @Mutation((returns) => Rol)
-  async deleteRol(@Args('id', { type: () => Int }) id: number) {
-    await this.rolesService.removeRolById(id);
-    return { message: 'success' };
+  @Mutation((returns) => Rol, { nullable: true })
+  deleteRol(@Args('id') id: number): boolean {
+    const result = this.rolesService.removeRolById(id);
+    return true;
   }
+
+  // @Mutation((returns) => Rol)
+  // async deleteRol(@Args('id', { type: () => Int }) id: number) {
+  //   await this.rolesService.removeRolById(id);
+  //   return { message: 'success' };
+  // }
   // @Mutation(() => Rol)
   // async deleteRol(
   //   @Args('id', { type: () => Int }) id: number,

@@ -17,7 +17,7 @@ export class CreateRolDto {
   @IsNotEmpty()
   @IsString()
   @Field()
-  readonly name: string;
+  name: string;
 }
 
 @InputType()

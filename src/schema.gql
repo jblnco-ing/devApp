@@ -27,37 +27,31 @@ type Developer {
   id: Int!
   name: String!
   email: String
+  rolId: Float!
+  rol: Rol!
 }
 
 type Query {
   findAllDeveloper: [Developer!]!
   findDeveloperById(id: Int!): Developer!
-  findAllProject: [Project!]!
-  findProjectById(id: Int!): Project!
   findAllRoles: [Rol!]!
   findRolById(id: Int!): Rol!
+  findAllProject: [Project!]!
+  findProjectById(id: Int!): Project!
 }
 
 type Mutation {
   createDeveloper(DeveloperInput: CreateDeveloperDto!): Developer!
-  createProject(ProjectInput: CreateProjectDto!): Project!
   createRol(rolInput: CreateRolDto!): Rol!
   updateRol(id: Int!, rolInput: UpdateRolDto!): Rol!
-  deleteRol(id: Int!): Rol!
+  deleteRol(id: Float!): Rol
+  createProject(ProjectInput: CreateProjectDto!): Project!
 }
 
 input CreateDeveloperDto {
   name: String!
   email: String
-  rolId: Int!
-}
-
-input CreateProjectDto {
-  name: Int!
-  description: String
-  status: Float!
-  rolId: Int!
-  developerId: Int!
+  rolId: Float!
 }
 
 input CreateRolDto {
@@ -66,4 +60,12 @@ input CreateRolDto {
 
 input UpdateRolDto {
   name: String
+}
+
+input CreateProjectDto {
+  name: Int!
+  description: String
+  status: Float!
+  rolId: Int!
+  developerId: Int!
 }

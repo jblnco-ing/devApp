@@ -7,6 +7,7 @@ import {
   IsEmail,
   IsArray,
   IsOptional,
+  IsInt,
 } from 'class-validator';
 import { PartialType } from '@nestjs/graphql';
 
@@ -17,19 +18,21 @@ export class CreateDeveloperDto {
   @IsNotEmpty()
   @IsString()
   @Field()
-  readonly name: string;
+  name: string;
   @MinLength(1)
   @MaxLength(80)
   @IsString()
   @IsEmail()
   @IsOptional()
   @Field({ nullable: true })
-  readonly email: string;
+  email?: string;
 
-  @IsArray()
-  @IsNotEmpty()
-  @Field((type) => Int)
-  readonly rolId: number[];
+  
+  //@IsNotEmpty()
+  @IsInt()
+  @Field()
+  rolId: number;
 }
 
+@InputType()
 export class UpdateDeveloperDto extends PartialType(CreateDeveloperDto) {}
