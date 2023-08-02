@@ -18,15 +18,7 @@ export class CreateRolDto {
   @IsString()
   @Field()
   readonly name: string;
-  //FK developerId
-  // @IsPositive()
-  // @IsNotEmpty()
-  // readonly developerId: number;
-  // //FK projectId
-  // @IsPositive()
-  // @IsNotEmpty()
-  // @IsArray()
-  // readonly projectId: number[];
 }
 
+@InputType()
 export class UpdateRolDto extends PartialType(CreateRolDto) {}

@@ -42,6 +42,8 @@ type Mutation {
   createDeveloper(DeveloperInput: CreateDeveloperDto!): Developer!
   createProject(ProjectInput: CreateProjectDto!): Project!
   createRol(rolInput: CreateRolDto!): Rol!
+  updateRol(id: Int!, rolInput: UpdateRolDto!): Rol!
+  deleteRol(id: Int!): Rol!
 }
 
 input CreateDeveloperDto {
@@ -60,4 +62,8 @@ input CreateProjectDto {
 
 input CreateRolDto {
   name: String!
+}
+
+input UpdateRolDto {
+  name: String
 }

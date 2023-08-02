@@ -25,13 +25,17 @@ export class RolesService {
     return this.rolRepository.save(newRol);
   }
 
-  async updateRol(id: Rol, changes: UpdateRolDto): Promise<Rol> {
-    const newRol = await this.rolRepository.findOneBy(id);
+  async updateRol(id: number, changes: UpdateRolDto): Promise<Rol> {
+    const newRol = await this.rolRepository.findOne({
+      where: {
+        id,
+      },
+    });
     this.rolRepository.merge(newRol, changes);
     return this.rolRepository.save(newRol);
   }
 
-  // removeRolById(id: number) {
-  //   return this.rolRepository.delete(id);
-  // }
+  removeRolById(id: number) {
+    return this.rolRepository.delete(id);
+  }
 }
