@@ -1,13 +1,11 @@
-import { Field, InputType, Int } from '@nestjs/graphql';
+import { Field, InputType } from '@nestjs/graphql';
 import {
   IsNotEmpty,
   IsString,
   MaxLength,
   MinLength,
   IsEmail,
-  IsArray,
   IsOptional,
-  IsInt,
 } from 'class-validator';
 import { PartialType } from '@nestjs/graphql';
 
@@ -27,10 +25,9 @@ export class CreateDeveloperDto {
   @Field({ nullable: true })
   email?: string;
 
-  @IsNotEmpty()
-  @IsInt()
-  @Field()
-  rolId: number;
+  @IsOptional()
+  @Field(() => [Number], { nullable: true })
+  rolesIds?: number[];
 }
 
 @InputType()

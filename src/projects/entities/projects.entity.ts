@@ -40,12 +40,12 @@ export class Project {
   @Column({ type: 'enum', enum: statusType })
   @Field((type) => statusType)
   status: statusType;
-  //role_project
-  @Field((type) => Int)
+
+  //ManyToMany relationship
   @ManyToMany(() => Rol, (rol) => rol.projects)
   roles: Rol[];
+
   //ManyToMany relationship
   @ManyToMany(() => Developer, (developer) => developer.projects)
-  @JoinTable()
   developers: Developer[];
 }
