@@ -19,7 +19,7 @@ import { Project } from 'src/projects/entities/projects.entity';
 export class Developer {
   //id
   @PrimaryGeneratedColumn()
-  @Field((type) => Int)
+  @Field(Int)
   id: number;
   //name
   @Column({ type: 'varchar', length: 80, unique: true })
@@ -29,14 +29,14 @@ export class Developer {
   @Column({ type: 'varchar', length: 50, nullable: true })
   @Field({ nullable: true })
   email?: string;
+
   //ManyToMany Project relationship
   @ManyToMany(() => Rol, (rol) => rol.developers)
   @JoinTable()
-  @JoinColumn({ name: 'Naya' })
-  @Column({ type: 'int' })
-  @Field((type) => Int)
-  rolId: number;
+  roles: Rol[];
+
   //ManyToMany Project relationship
   @ManyToMany(() => Project, (project) => project.developers)
+  @JoinTable()
   projects: Project[];
 }

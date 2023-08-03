@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Rol } from '../entities/rol.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { CreateRolDto, UpdateRolDto } from '../dtos/rol.dto';
 
 @Injectable()
@@ -16,6 +16,14 @@ export class RolesService {
     return this.rolRepository.findOne({
       where: {
         id,
+      },
+    });
+  }
+
+  async findRolesByIds(ids: number[]): Promise<Rol[]> {
+    return this.rolRepository.find({
+      where: {
+        id: In(ids),
       },
     });
   }

@@ -23,23 +23,33 @@ export class DevelopersService {
       },
     });
   }
-  createDeveloper(developer: CreateDeveloperDto): Promise<Developer> {
+  async createDeveloper(developer: CreateDeveloperDto): Promise<Developer> {
+    const roles = await this.rolesService.findRolesByIds(developer.rolesIds);
+    developer['roles'] = roles;
+    console.log(developer);
+
     const newDeveloper = this.devRepository.create(developer);
     // //[1,2,3]
     // const idsRolesDeveloper = newDeveloper.roles;
-    // idsRolesDeveloper.forEach(idRol => { 
+    // idsRolesDeveloper.forEach(idRol => {
     //   if()
     //   this.devRepository.save({
     //     "name": newDeveloper.name,
     //     "email": newDeveloper.email,
     //     "rolId": idRol,
     //   });
-  // });
-  //   const myDeveloper = 
+    // });
+    //   const myDeveloper =
     return this.devRepository.save(newDeveloper);
   }
 
-  async getRol(rolId: number): Promise<Rol> {
-    return this.rolesService.findRolById(rolId);
+  async getRoles(id: number): Promise<Rol[]> {
+    const developer = await this.devRepository.findOne({
+      where: {
+        id,
+      },
+      relations: ['roles'],
+    });
+    return developer.roles;
   }
 }
