@@ -35,16 +35,15 @@ export class CreateProjectDto {
   description: string;
   @IsEnum(statusType)
   @IsNotEmpty()
-  @Field()
+  @Field((type) => statusType)
   status: statusType;
+  @IsOptional()
+  @Field(() => [Number], { nullable: true })
+  rolesIds?: number[];
   @IsArray()
   @IsNotEmpty()
-  @Field((type) => Int)
-  rolId: number[];
-  @IsArray()
-  @IsNotEmpty()
-  @Field((type) => Int)
-  developerId: number[];
+  @Field(() => [Number], { nullable: true })
+  developerIds?: number[];
 }
 
 export class UpdateProjectDto extends PartialType(CreateProjectDto) {}

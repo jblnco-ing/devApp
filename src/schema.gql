@@ -7,7 +7,6 @@ type Project {
   name: String!
   description: String
   status: statusType!
-  roles: Int!
 }
 
 enum statusType {
@@ -27,8 +26,7 @@ type Developer {
   id: Int!
   name: String!
   email: String
-  rolId: Int!
-  rol: Rol!
+  roles: [Rol!]!
 }
 
 type Query {
@@ -45,13 +43,12 @@ type Mutation {
   createRol(rolInput: CreateRolDto!): Rol!
   updateRol(id: Int!, rolInput: UpdateRolDto!): Rol!
   deleteRol(id: Float!): Rol
-  createProject(ProjectInput: CreateProjectDto!): Project!
 }
 
 input CreateDeveloperDto {
   name: String!
   email: String
-  rolId: Float!
+  rolesIds: [Float!]
 }
 
 input CreateRolDto {
@@ -60,12 +57,4 @@ input CreateRolDto {
 
 input UpdateRolDto {
   name: String
-}
-
-input CreateProjectDto {
-  name: Int!
-  description: String
-  status: Float!
-  rolId: Int!
-  developerId: Int!
 }

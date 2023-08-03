@@ -17,6 +17,26 @@ enum statusType {
   'Canceled',
   'Other',
 }
+// const statusEnum = new registerEnumType({
+//   nombre: 'TareaStateEnum',
+//   valores: {
+//     ACTIVE: {
+//       valor: 0,
+//     },
+//     PAUSE: {
+//       valor: 1,
+//     },
+//     DONE: {
+//       valor: 2,
+//     },
+//     CANCELED: {
+//       valor: 3,
+//     },
+//     OTHER: {
+//       valor: 3,
+//     },
+//   },
+// });
 registerEnumType(statusType, {
   name: 'statusType',
 });
@@ -40,12 +60,11 @@ export class Project {
   @Column({ type: 'enum', enum: statusType })
   @Field((type) => statusType)
   status: statusType;
-  //role_project
-  @Field((type) => Int)
+  //ManyToMany relationship
   @ManyToMany(() => Rol, (rol) => rol.projects)
+  @JoinTable()
   roles: Rol[];
   //ManyToMany relationship
   @ManyToMany(() => Developer, (developer) => developer.projects)
-  @JoinTable()
   developers: Developer[];
 }

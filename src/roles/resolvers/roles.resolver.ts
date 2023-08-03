@@ -5,7 +5,7 @@ import { CreateRolDto, UpdateRolDto } from '../dtos/rol.dto';
 import { DeleteResult } from 'typeorm/driver/mongodb/typings';
 import { type } from 'os';
 
-@Resolver()
+@Resolver(Rol)
 export class RolesResolver {
   constructor(private rolesService: RolesService) {}
   @Query((returns) => [Rol])

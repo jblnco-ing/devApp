@@ -2,7 +2,7 @@ import { Resolver, Query, Args, Int, Mutation } from '@nestjs/graphql';
 import { ProjectsService } from '../services/projects.service';
 import { Project } from '../entities/projects.entity';
 import { CreateProjectDto, UpdateProjectDto } from '../dtos/project.dto';
-@Resolver()
+@Resolver(Project)
 export class ProjectsResolver {
   constructor(private projectService: ProjectsService) {}
   @Query((returns) => [Project])
@@ -13,8 +13,8 @@ export class ProjectsResolver {
   findProjectById(@Args('id', { type: () => Int }) id: number) {
     return this.projectService.findProjectById(id);
   }
-  @Mutation((returns) => Project)
-  createProject(@Args('ProjectInput') ProjectInput: CreateProjectDto) {
-    return this.projectService.createProject(ProjectInput);
-  }
+  // @Mutation((returns) => Project)
+  // createProject(@Args('ProjectInput') ProjectInput: CreateProjectDto) {
+  //   return this.projectService.createProject(ProjectInput);
+  // }
 }

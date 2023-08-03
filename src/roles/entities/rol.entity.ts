@@ -25,10 +25,9 @@ export class Rol {
   //sabe que el decorador que el decorador que
   // tiene la relación manyToOne es la que
   //debe tener la FK
-  @ManyToMany(() => Developer, (developer) => developer.rolId)
+  @ManyToMany(() => Developer, (developer) => developer.roles)
   developers: Developer[];
-  //Project
+  //ManyToMany relationship
   @ManyToMany(() => Project, (project) => project.roles)
-  @JoinTable()
   projects: Project[];
 }

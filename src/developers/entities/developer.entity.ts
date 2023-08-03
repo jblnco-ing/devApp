@@ -3,7 +3,6 @@ import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
-  OneToMany,
   ManyToMany,
   JoinTable,
   JoinColumn,
@@ -32,11 +31,9 @@ export class Developer {
   //ManyToMany Project relationship
   @ManyToMany(() => Rol, (rol) => rol.developers)
   @JoinTable()
-  @JoinColumn({ name: 'Naya' })
-  @Column({ type: 'int' })
-  @Field((type) => Int)
-  rolId: number;
+  roles: Rol[];
   //ManyToMany Project relationship
   @ManyToMany(() => Project, (project) => project.developers)
+  @JoinTable()
   projects: Project[];
 }
