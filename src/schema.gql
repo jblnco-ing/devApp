@@ -27,7 +27,7 @@ type Developer {
   id: Int!
   name: String!
   email: String
-  rolId: Float!
+  rolId: Int!
   rol: Rol!
 }
 

@@ -27,8 +27,7 @@ export class CreateDeveloperDto {
   @Field({ nullable: true })
   email?: string;
 
-  
-  //@IsNotEmpty()
+  @IsNotEmpty()
   @IsInt()
   @Field()
   rolId: number;

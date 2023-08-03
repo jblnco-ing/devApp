@@ -26,25 +26,25 @@ export class CreateProjectDto {
   @IsNotEmpty()
   @IsString()
   @Field((type) => Int)
-  readonly name: string;
+  name: string;
   @MinLength(1)
   @MaxLength(200)
   @IsOptional()
   @IsString()
   @Field({ nullable: true })
-  readonly description: string;
+  description: string;
   @IsEnum(statusType)
   @IsNotEmpty()
   @Field()
-  readonly status: statusType;
+  status: statusType;
   @IsArray()
   @IsNotEmpty()
   @Field((type) => Int)
-  readonly rolId: number[];
+  rolId: number[];
   @IsArray()
   @IsNotEmpty()
   @Field((type) => Int)
-  readonly developerId: number[];
+  developerId: number[];
 }
 
 export class UpdateProjectDto extends PartialType(CreateProjectDto) {}

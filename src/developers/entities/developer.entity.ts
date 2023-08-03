@@ -5,6 +5,8 @@ import {
   PrimaryGeneratedColumn,
   OneToMany,
   ManyToMany,
+  JoinTable,
+  JoinColumn,
 } from 'typeorm';
 import { Rol } from 'src/roles/entities/rol.entity';
 import { Project } from 'src/projects/entities/projects.entity';
@@ -29,7 +31,10 @@ export class Developer {
   email?: string;
   //ManyToMany Project relationship
   @ManyToMany(() => Rol, (rol) => rol.developers)
-  @Field()
+  @JoinTable()
+  @JoinColumn({ name: 'Naya' })
+  @Column({ type: 'int' })
+  @Field((type) => Int)
   rolId: number;
   //ManyToMany Project relationship
   @ManyToMany(() => Project, (project) => project.developers)

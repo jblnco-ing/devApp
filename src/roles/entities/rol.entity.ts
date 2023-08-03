@@ -26,7 +26,6 @@ export class Rol {
   // tiene la relación manyToOne es la que
   //debe tener la FK
   @ManyToMany(() => Developer, (developer) => developer.rolId)
-  @JoinTable()
   developers: Developer[];
   //Project
   @ManyToMany(() => Project, (project) => project.roles)
