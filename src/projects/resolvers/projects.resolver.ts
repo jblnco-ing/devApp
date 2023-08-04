@@ -5,7 +5,7 @@ import { CreateProjectDto, UpdateProjectDto } from '../dtos/project.dto';
 @Resolver(Project)
 export class ProjectsResolver {
   constructor(private projectService: ProjectsService) {}
-  @Query((returns) => [Project])
+  @Query(() => [Project])
   findAllProject() {
     return this.projectService.findAll();
   }
@@ -13,11 +13,11 @@ export class ProjectsResolver {
   findDeveloperById(@Args('id', { type: () => Int }) id: number) {
     return this.projectService.findProjectById(id);
   }
-  @Query((returns) => Project)
+  @Query(() => Project)
   findProjectById(@Args('id', { type: () => Int }) id: number) {
     return this.projectService.findProjectById(id);
   }
-  @Mutation((returns) => Project)
+  @Mutation(() => Project)
   createProject(@Args('ProjectInput') ProjectInput: CreateProjectDto) {
     return this.projectService.createProject(ProjectInput);
   }
