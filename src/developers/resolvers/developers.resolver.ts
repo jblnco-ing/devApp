@@ -26,10 +26,6 @@ export class DevelopersResolver {
   }
   @Mutation(() => Developer)
   createDeveloper(@Args('DeveloperInput') DeveloperInput: CreateDeveloperDto) {
-    //id de los roles de un developer
-    // const idsRolesDeveloperInput = DeveloperInput.rolId;
-    // const allRoles = this.rolService.findAll();
-    // const a = this.devService.createDeveloper(DeveloperInput);
     return this.devService.createDeveloper(DeveloperInput);
   }
   @ResolveProperty(() => [Rol])

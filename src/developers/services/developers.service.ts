@@ -28,17 +28,6 @@ export class DevelopersService {
     developer['roles'] = roles;
     console.log(developer);
     const newDeveloper = this.devRepository.create(developer);
-    // //[1,2,3]
-    // const idsRolesDeveloper = newDeveloper.roles;
-    // idsRolesDeveloper.forEach(idRol => {
-    //   if()
-    //   this.devRepository.save({
-    //     "name": newDeveloper.name,
-    //     "email": newDeveloper.email,
-    //     "rolId": idRol,
-    //   });
-    // });
-    //const myDeveloper =
     return this.devRepository.save(newDeveloper);
   }
 

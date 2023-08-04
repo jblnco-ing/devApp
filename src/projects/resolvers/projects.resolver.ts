@@ -9,12 +9,16 @@ export class ProjectsResolver {
   findAllProject() {
     return this.projectService.findAll();
   }
+  @Query(() => Project)
+  findDeveloperById(@Args('id', { type: () => Int }) id: number) {
+    return this.projectService.findProjectById(id);
+  }
   @Query((returns) => Project)
   findProjectById(@Args('id', { type: () => Int }) id: number) {
     return this.projectService.findProjectById(id);
   }
-  // @Mutation((returns) => Project)
-  // createProject(@Args('ProjectInput') ProjectInput: CreateProjectDto) {
-  //   return this.projectService.createProject(ProjectInput);
-  // }
+  @Mutation((returns) => Project)
+  createProject(@Args('ProjectInput') ProjectInput: CreateProjectDto) {
+    return this.projectService.createProject(ProjectInput);
+  }
 }

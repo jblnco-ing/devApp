@@ -10,33 +10,13 @@ import { Rol } from 'src/roles/entities/rol.entity';
 import { Developer } from 'src/developers/entities/developer.entity';
 import { registerEnumType } from '@nestjs/graphql';
 
-enum statusType {
+export enum statusType {
   'Active',
   'Pause',
   'Done',
   'Canceled',
   'Other',
 }
-// const statusEnum = new registerEnumType({
-//   nombre: 'TareaStateEnum',
-//   valores: {
-//     ACTIVE: {
-//       valor: 0,
-//     },
-//     PAUSE: {
-//       valor: 1,
-//     },
-//     DONE: {
-//       valor: 2,
-//     },
-//     CANCELED: {
-//       valor: 3,
-//     },
-//     OTHER: {
-//       valor: 3,
-//     },
-//   },
-// });
 registerEnumType(statusType, {
   name: 'statusType',
 });
@@ -57,9 +37,9 @@ export class Project {
   @Field({ nullable: true })
   description?: string;
   //status
-  @Column({ type: 'enum', enum: statusType })
-  @Field((type) => statusType)
-  status: statusType;
+  @Column({ type: 'enum', enum: statusType, nullable: true })
+  @Field((type) => statusType, { nullable: true })
+  status?: statusType;
   //ManyToMany relationship
   @ManyToMany(() => Rol, (rol) => rol.projects)
   @JoinTable()

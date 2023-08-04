@@ -28,7 +28,7 @@ export class Developer {
   @Column({ type: 'varchar', length: 50, nullable: true })
   @Field({ nullable: true })
   email?: string;
-  //ManyToMany Project relationship
+  //ManyToMany Rol relationship
   @ManyToMany(() => Rol, (rol) => rol.developers)
   @JoinTable()
   roles: Rol[];

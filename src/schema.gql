@@ -6,7 +6,7 @@ type Project {
   id: Int!
   name: String!
   description: String
-  status: statusType!
+  status: statusType
 }
 
 enum statusType {
@@ -31,7 +31,7 @@ type Developer {
 
 type Query {
   findAllDeveloper: [Developer!]!
-  findDeveloperById(id: Int!): Developer!
+  findDeveloperById(id: Int!): Project!
   findAllRoles: [Rol!]!
   findRolById(id: Int!): Rol!
   findAllProject: [Project!]!
@@ -43,6 +43,7 @@ type Mutation {
   createRol(rolInput: CreateRolDto!): Rol!
   updateRol(id: Int!, rolInput: UpdateRolDto!): Rol!
   deleteRol(id: Float!): Rol
+  createProject(ProjectInput: CreateProjectDto!): Project!
 }
 
 input CreateDeveloperDto {
@@ -57,4 +58,12 @@ input CreateRolDto {
 
 input UpdateRolDto {
   name: String
+}
+
+input CreateProjectDto {
+  name: String!
+  description: String
+  status: statusType
+  rolesIds: [Float!]
+  developerIds: [Float!]
 }

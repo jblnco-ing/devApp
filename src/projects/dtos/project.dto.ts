@@ -9,15 +9,7 @@ import {
   IsOptional,
 } from 'class-validator';
 import { PartialType } from '@nestjs/graphql';
-import { registerEnumType } from '@nestjs/graphql';
-
-enum statusType {
-  'Active',
-  'Pause',
-  'Done',
-  'Canceled',
-  'Other',
-}
+import { statusType } from '../entities/projects.entity';
 
 @InputType()
 export class CreateProjectDto {
@@ -25,7 +17,7 @@ export class CreateProjectDto {
   @MaxLength(80)
   @IsNotEmpty()
   @IsString()
-  @Field((type) => Int)
+  @Field((type) => String)
   name: string;
   @MinLength(1)
   @MaxLength(200)
@@ -35,8 +27,9 @@ export class CreateProjectDto {
   description: string;
   @IsEnum(statusType)
   @IsNotEmpty()
-  @Field((type) => statusType)
-  status: statusType;
+  @IsOptional()
+  @Field((type) => statusType, { nullable: true })
+  status?: statusType;
   @IsOptional()
   @Field(() => [Number], { nullable: true })
   rolesIds?: number[];
